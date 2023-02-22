@@ -25,9 +25,11 @@
                 <div class="category">
                     <a href="{{ p.category.get_absolute_url }}" class={{ p.category.slug }}>{{ p.category.name }}</a>
                 </div>
-                {% if p.photo %}
-                    <img class="img-post" src="{{ p.photo.url }}" alt="{{ p.slug }}">
-                {% endif %}
+                <div class="photo-of-the-post">
+                    {% if p.photo %}
+                        <img class="img-post" src="{{ p.photo.url }}" alt="{{ p.slug }}">
+                    {% endif %}
+                </div>
                 <p>{{ p.header_text|linebreaks }}</p>
                 <a class="read-next" href="{{ p.get_absolute_url }}">{{ p.name_button_next }}</a>
             </div>

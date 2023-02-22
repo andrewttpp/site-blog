@@ -1,13 +1,3 @@
-body{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
+@media only screen and (max-width: 1200px){
 
-.main {
-    flex-grow: 1;
-}
-
-.best-articles{
-    flex-grow: 0;
 }

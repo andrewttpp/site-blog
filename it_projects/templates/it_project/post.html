@@ -21,10 +21,13 @@
         <a class="title_post" href="{{ post.category.get_absolute_url }}">{{ post.title }}</a>
         <div class="category"><a href="{{ post.category.get_absolute_url }}"
                                  class="{{ post.category.slug }}">{{ post.category.name }}</a></div>
-        {% if post.photo %}
-            <img class="img-post" src="{{ post.photo.url }}" alt="{{ post.slug }}">
-        {% endif %}
+        <div class="photo-of-the-post">
+            {% if post.photo %}
+                <img class="img-post" src="{{ post.photo.url }}" alt="{{ post.slug }}">
+            {% endif %}
+        </div>
         <p>{{ post.header_text|linebreaks }}{{ post.content|linebreaks }}</p>
+
     </div>
 {% endblock %}
 {% block best-articles %}
