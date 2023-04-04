@@ -107,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -120,6 +120,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = []
+SECURE_CONTENT_TYPE_NOSNIFF = False
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -127,4 +128,18 @@ STATICFILES_DIRS = []
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-CSRF_TRUSTED_ORIGINS = ['https://*613b-46-172-30-14.eu.ngrok.io','https://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://2d10-46-172-29-49.eu.ngrok.io', 'https://*.127.0.0.1']
+
+LOGIN_REDIRECT_URL = '/'
+
+AUTH_USER_MODEL = 'it_projects.User'
+AUTH_PROFILE_MODULE = 'accounts.ProfileUser'
+
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_FROM = 'aindri821@gmail.com'
+EMAIL_HOST_USER = 'aindri821@gmail.com'
+EMAIL_HOST_PASSWORD = 'jigyfecnuyzoerxj'
+PASSWORD_RESET_TIMEOUT = 14400

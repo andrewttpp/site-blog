@@ -1,4 +1,4 @@
-{% extends 'it_project/base.html' %}
+{% extends 'it_project/base_1.html' %}
 {% load static %}
 {% load it_projects_tags %}
 {% block categories %}
@@ -16,9 +16,13 @@
 {% block content %}
     <div class="article">
         <div class="article-panel">
+            <div class="author-post-avatar"><a href="{{ p.author_setting.get_absolute_url }}"><img
+                    class="author-post-avatar-img"
+                    src="/media/{{ post.author_setting.avatar_author }}" alt="{{ post.slug }}"></a></div>
+            <div class="author-post"><a href="{{ p.author_setting.get_absolute_url }}">{{ post.author }}</a></div>
             <div class="date_post">{{ post.time_create|date:"d M. в H:i" }}</div>
         </div>
-        <a class="title_post" href="{{ post.category.get_absolute_url }}">{{ post.title }}</a>
+        <a class="title_post" href="{{ post.title.get_absolute_url }}">{{ post.title }}</a>
         <div class="category"><a href="{{ post.category.get_absolute_url }}"
                                  class="{{ post.category.slug }}">{{ post.category.name }}</a></div>
         <div class="photo-of-the-post">
@@ -26,8 +30,7 @@
                 <img class="img-post" src="{{ post.photo.url }}" alt="{{ post.slug }}">
             {% endif %}
         </div>
-        <p>{{ post.header_text|linebreaks }}{{ post.content|linebreaks }}</p>
-
+        <p>{{ post.content|linebreaks }}</p>
     </div>
 {% endblock %}
 {% block best-articles %}

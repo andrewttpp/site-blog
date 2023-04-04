@@ -1,4 +1,4 @@
-{% extends 'it_project/base.html' %}
+{% extends 'it_project/../base.html' %}
 {% load it_projects_tags %}
 
 {% block categories %}
@@ -9,7 +9,13 @@
             {% else %}
                 <li><a href="{% url 'main' %}">Все категории</a></li>
             {% endif %}
-            {% show_categories 'name' cat_selected %}
+            {% for c in cats %}
+                {% if c.slug == cat_selected %}
+                    <li class="selected">{{ c.name }}</li>
+                {% else %}
+                    <li><a href="{{c.get_absolute_url}}">{{ c.name }}</a></li>
+                {% endif %}
+            {% endfor %}
         </ul>
     </div>
 {% endblock %}
@@ -25,7 +31,7 @@
                 <div class="category">
                     <a href="{{ p.category.get_absolute_url }}" class={{ p.category.slug }}>{{ p.category.name }}</a>
                 </div>
-                <div class="photo-of-the-post">
+                <div class=" ">
                     {% if p.photo %}
                         <img class="img-post" src="{{ p.photo.url }}" alt="{{ p.slug }}">
                     {% endif %}

@@ -1,4 +1,4 @@
-{% extends 'it_project/base.html' %}
+{% extends 'it_project/base_1.html' %}
 {% block content %}
     <div class="add_page_form">
         <form action="{% url 'add_page' %}" method="post" enctype="multipart/form-data">
@@ -13,12 +13,22 @@
                         </div>
                         <div class="form-error-first">{{ f.errors }}</div>
                     {% elif f.id_for_label == 'id_photo' %}
-                        <label class="form-label"
-                               for="{{ f.id_for_label }}">{{ f.label }}</label>
+                        <label class="form-label-photo">{{ f.label }}</label>
+                        <label id="button-mobile-uploader">
+                            {{ f }}
+                            <span class="input-file-btn">Выберите файл</span>
+                        </label>
+                        <div class="input-file-list">
+                            <span class="name-file"></span>
+                            <span class="delete-photo" onclick="deleteCurrentPhoto()">X</span>
+                        </div>
                         <div class="drop-box" id="dropPreview">
                             <img src="" class="myimage" id="my_image">
-                            <button style="display: none" type="button" id="delete" onclick="alerted()">Удалить</button>
-                            <span class="image-preview__default-text">Image Prewiev<br>Максимальный размер фото 700x700<br>Допустимый формат .jpg</span>
+                            <button style="display: none" type="button" id="delete" onclick="alerted()">
+                                X
+                            </button>
+                            <span class="image-preview__default-text">Image Prewiev<br>Максимальный размер фото
+                                    700x700<br>Допустимый формат .jpg, .jpeg, .png</span>
                             <label id="button_uploader">{{ f }}<span>Выбрать файл</span></label>
                         </div>
                         <div class="form-error-first">{{ f.errors }}</div>
@@ -37,72 +47,139 @@
         </form>
     </div>
     <script>
-        function alerted() {
-            const previewDefaultText = document.querySelector('.image-preview__default-text')
-            previewDefaultText.style.display = 'block'
-            const previewContainer = document.getElementById('id_photo')
-            previewContainer.value = ''
-            const previewContaine = document.getElementById('button_uploader')
-            previewContaine.style.display = 'block'
-            const buttonOfDelete = document.getElementById('delete')
-            buttonOfDelete.style.display = 'none'
-            const previewImage = document.querySelector('.myimage')
-            previewImage.style.display = 'none'
-            previewImage.setAttribute('src', "");
-            const previewDrop = document.getElementById('dropPreview')
-            previewDrop.style.width = 'calc(100% - 4px)'
-        }
-
-        const inpFile = document.getElementById('id_photo')
         const previewContainer = document.getElementById('dropPreview')
         const previewImage = document.querySelector('.myimage')
         const previewDefaultText = document.querySelector('.image-preview__default-text')
 
-        inpFile.addEventListener('change', function () {
-            const file = this.files[0];
-            // Allowing file type
-            var allowedExtensions =
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+            document.querySelector('.drop-box').style.display = 'none'
+
+            function deleteCurrentPhoto() {
+                document.querySelector('input[type=file]').value = ''
+                let blockInp = document.querySelector('.input-file-list')
+                blockInp.style.display = 'none'
+            }
+
+            const inpFile = document.querySelector('#button-mobile-uploader #id_photo')
+
+            inpFile.addEventListener('change', function () {
+                const file = this.files[0];
+                // Allowing file type
+                let allowedExtensions =
                     /(\.jpg|\.jpeg|\.png)$/i;
 
-            var filePath = inpFile.value;
+                let filePath = inpFile.value;
 
-            if (!allowedExtensions.exec(filePath)) {
-                alert('Допускается изображение только в формате jpg')
-                inpFile.value = '';
-                return false;
-            }
-            else (allowedExtensions.exec(filePath))
-            {
-                const reader = new FileReader();
-                previewImage.style.borderRadius = '5px'
-                previewImage.style.display = 'block'
-                previewImage.style.alignSelf = 'center'
-                previewImage.style.maxWidth = '100%'
-                previewImage.style.maxHeight = '700px'
-                previewDefaultText.style.display = 'none'
-                const previewButton = document.getElementById('button_uploader')
-                previewButton.style.display = 'none'
-                const buttonOfDelete = document.getElementById('delete')
-                buttonOfDelete.style.display = 'block'
 
-                reader.addEventListener('load', function () {
-                    console.log(this)
-                    previewImage.setAttribute('src', this.result)
-                })
+                if (!allowedExtensions.exec(filePath)) {
+                    alert('Допускается изображение только в формате jpg')
+                    inpFile.value = '';
+                    return false;
+                } else (allowedExtensions.exec(filePath))
 
-                reader.readAsDataURL(file);
+                {
+                    const reader = new FileReader();
 
-                previewImage.onload = function () {
-                    if (previewImage.clientHeight > 300) {
-                        console.log('calc(' + previewContainer.clientHeight + ' - 39%)')
-                        buttonOfDelete.style.marginTop = 'calc(' + previewContainer.clientHeight + 'px * 4/5)'
-                        buttonOfDelete.style.position = 'absolute'
+
+                    reader.onload = function () {
+                        if (previewImage) {
+                            previewImage.setAttribute('src', reader.result)
+                        }
                     }
-                    previewContainer.style.width = String(previewImage.clientWidth + 'px')
-                    console.log(previewImage.clientWidth)
+
+                    reader.readAsDataURL(file);
+                    let blockInp = document.querySelector('.input-file-list')
+                    blockInp.style.display = 'flex'
+                    blockInp.style.flexDirection = 'row'
+                    blockInp.style.alignItems = 'center'
+                    let name_file = document.querySelector('.input-file-list .name-file')
+                    name_file.innerHTML = inpFile.value.replace(/^.*[\\\/]/, '')
                 }
+            })
+
+        } else {
+            document.querySelector('#button-mobile-uploader').style.display = 'none'
+            document.querySelector('.input-file-list').style.display = 'none'
+
+            const inpFile = document.querySelector('#button_uploader #id_photo')
+
+            function alerted() {
+                const previewDefaultText = document.querySelector('.image-preview__default-text')
+                previewDefaultText.style.display = 'block'
+                document.querySelector('#button_uploader #id_photo').value = ""
+                const previewContaine = document.getElementById('button_uploader')
+                previewContaine.style.display = 'block'
+                const buttonOfDelete = document.getElementById('delete')
+                buttonOfDelete.style.display = 'none'
+                const previewImage = document.querySelector('.myimage')
+                previewImage.style.display = 'none'
+                previewImage.setAttribute('src', '');
+                const previewDrop = document.getElementById('dropPreview')
+                previewDrop.style.width = 'calc(100% - 4px)'
             }
-        })
+
+
+            inpFile.addEventListener('change', function () {
+                const file = this.files[0];
+
+                // Allowing file type
+                let allowedExtensions =
+                    /(\.jpg|\.jpeg|\.png)$/i;
+
+                let filePath = inpFile.value;
+
+
+                if (!allowedExtensions.exec(filePath)) {
+                    alert('Допускается изображение только в формате jpg')
+                    inpFile.value = '';
+                    return false;
+                } else (allowedExtensions.exec(filePath))
+
+                {
+                    const reader = new FileReader();
+
+
+                    reader.onload = function () {
+                        if (previewImage) {
+                            previewImage.setAttribute('src', reader.result)
+                        }
+                    }
+
+                    reader.readAsDataURL(file);
+
+                    if (document.querySelector('.drop-box').style.display !== 'none') {
+                        previewImage.style.borderRadius = '5px'
+                        previewImage.style.display = 'block'
+                        previewImage.style.alignSelf = 'center'
+                        previewImage.style.maxWidth = '100%'
+                        previewImage.style.maxHeight = '700px'
+                        previewDefaultText.style.display = 'none'
+                        const previewButton = document.getElementById('button_uploader')
+                        previewButton.style.display = 'none'
+                        const buttonOfDelete = document.getElementById('delete')
+                        buttonOfDelete.style.display = 'block'
+
+                        previewImage.onload = function () {
+                            previewContainer.style.width = String(previewImage.clientWidth + 'px')
+                            buttonOfDelete.style.marginLeft = 'calc(' + previewImage.clientWidth + 'px * 95/100)'
+                            if (previewImage.clientWidth > 300 && previewImage.clientHeight > 300) {
+                                buttonOfDelete.style.marginBottom = 'calc(' + previewImage.clientHeight + 'px - 35px)'
+                            } else if (previewImage.clientHeight <= 300 && previewImage.clientWidth <= 300) {
+                                previewContainer.style.width = '300px'
+                                buttonOfDelete.style.marginBottom = 'calc(' + previewContainer.clientHeight + 'px - 40px)'
+                                buttonOfDelete.style.marginLeft = 'calc(' + previewContainer.clientWidth + 'px - 35px)'
+                            } else if (previewImage.clientHeight <= 300) {
+                                buttonOfDelete.style.marginLeft = 'calc(' + previewImage.clientWidth + 'px * 95/100)'
+                                buttonOfDelete.style.marginBottom = 'calc(' + previewContainer.clientHeight + 'px - 40px)'
+                            }
+                            buttonOfDelete.style.position = 'absolute'
+                        }
+                    }
+                }
+            })
+        }
+
+
     </script>
 {% endblock %}
 {% block dropzone %}

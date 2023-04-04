@@ -1,0 +1,52 @@
+{% load it_projects_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>{{ title }}</title>
+    <link type="text/css" href="{% static 'it_projects/css/style_other_colorscheme.css' %}" rel="stylesheet"/>
+    <link type="text/css" href="{% static 'it_projects/css/styles_2.css' %}" rel="stylesheet"/>
+    <script src="{% static 'it_projects/js/main.js' %}"></script>
+    <meta http-equiv="Content-Type" content="application/javascript; charset=utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link rel="shortcut icon" href="{% static 'it_projects/images/logo-globus.png' %}"
+          type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<header class="header">
+    {% block mainmenu %}
+        <ul id="mainmenu" class="mainmenu">
+            <li class="logo"><a href="{% url 'main' %}">
+                <div class="logo"></div>
+            </a></li>
+            {% for m in menu %}
+                {% if m.url_name == 'add_page' %}
+                    <li class="add_page_but"><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+                {% elif not forloop.last %}
+                    <li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+                {% else %}
+                    <li class="last"><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+    {% endblock mainmenu %}
+</header>
+<div class="main">
+    {% block categories %}
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+    {% block best-articles %}
+    {% endblock %}
+</div>
+<footer>
+    <p>&copy; 2023 Частичное или полное копирование информации с данного сайта для распространения на
+        других
+        ресурсах, в том числе и бумажных, строго запрещено.</p>
+
+</footer>
+</div>
+</body>
+</html>

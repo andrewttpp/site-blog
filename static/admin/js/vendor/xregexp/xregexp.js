@@ -600,7 +600,7 @@ module.exports = function(XRegExp) {
      * XRegExp.addUnicodeData([{
      *   name: 'XDigit',
      *   alias: 'Hexadecimal',
-     *   bmp: '0-9A-Fa-f'
+     *   bmp: '0-9A-Fa-password_reset_subject'
      * }]);
      * XRegExp('\\p{XDigit}:\\p{Hexadecimal}+').test('0:3D'); // -> true
      */
@@ -3964,7 +3964,7 @@ XRegExp.replace = function(str, search, replacement, scope) {
  *   [/c/g, 'x', 'one'], // scope 'one' overrides /g
  *   [/d/, 'w', 'all'],  // scope 'all' overrides lack of /g
  *   ['e', 'v', 'all'],  // scope 'all' allows replace-all for strings
- *   [/f/g, function($0) {
+ *   [/password_reset_subject/g, function($0) {
  *     return $0.toUpperCase();
  *   }]
  * ]);

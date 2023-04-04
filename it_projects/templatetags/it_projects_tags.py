@@ -1,4 +1,6 @@
 from django import template
+from django.db.models import Count
+
 from it_projects.models import *
 from it_projects.views import menu
 
@@ -12,8 +14,13 @@ def get_menu():
 
 @register.simple_tag(name='getbest')
 def get_menu():
-    best_posts = Projects.objects.all()
+    best_posts = Projects.objects.filter(is_published=True)
+
     return best_posts[0:3]
+
+
+# @register.simple_tag(name='post_user')
+# def get_posts(username):
 
 
 @register.inclusion_tag('it_project/list_categories.html')
