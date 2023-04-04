@@ -94,7 +94,6 @@ class Comments(models.Model):
         return self.content[0:200]
 
 
-# TODO:triggred when User object is created
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
     if created:
