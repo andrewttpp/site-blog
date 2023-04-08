@@ -1,0 +1,208 @@
+@font-face {
+    font-family: "Lucida Sans Unicode";
+    src: url('../fonts/lucidasansunicode.ttf');
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #444;
+    margin: 0;
+    padding: 0;
+    max-height: 100%;
+    min-width: 275px;
+    font-family: 'Lucida Sans Unicode', serif;
+}
+
+.main {
+    display: flex;
+    flex: 1 1 auto;
+    margin-top: 150px;
+    flex-grow: 1;
+    margin-left: 20%;
+}
+
+.authentication-form, .registration-form {
+    padding: 50px 80px 50px 80px;
+    border-radius: 30px;
+    border: 3px solid #1c567c;
+    background: transparent;
+    backdrop-filter: blur(15px);
+    font-family: 'Fira Code', serif;
+    max-width: 350px;
+}
+
+.main-authentication, .main-registration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 auto;
+    flex-direction: column;
+}
+
+.authentication-title, .registration-title {
+    font-size: 36px;
+    font-weight: bold;
+    font-family: 'Lucida Sans Unicode', serif;
+}
+
+.authentication-label, .registration-label {
+    font-size: 20px;
+    font-family: 'Lucida Sans Unicode', serif;
+    font-weight: bold;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    transition: .4s;
+    pointer-events: none;
+}
+
+.authentication-field-with-label, .registration-field-with-label {
+    border-bottom: 2px solid black;
+    position: relative;
+}
+
+.authentication-field, .registration-field {
+    outline: none;
+    resize: none;
+    border: none;
+    background-color: transparent;
+    height: 20px;
+    font-family: 'Lucida Sans Unicode', serif;
+    font-size: 15px;
+    -webkit-box-shadow: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
+.authentication-field:focus, .registration-field:focus {
+    outline: none;
+}
+
+.authentication-field-with-label, .registration-field-with-label {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+}
+
+.authentication-field-with-label:last-child, .registration-field-with-label:last-child {
+    margin-top: 0;
+}
+
+.authentication-button, .registration-button {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.authentication-button-submit, .registration-button-submit {
+    border-radius: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 100%;
+    font-family: 'Lucida Sans Unicode', serif;
+    background-color: #205a7f;
+    border: 2px solid #205a7f;
+    color: #ffffff;
+    height: 30px;
+    text-align: center;
+    font-size: 16px;
+    transition: all 0.3s ease-out;
+}
+
+.authentication-button-submit:hover, .registration-button-submit:hover {
+    background-color: #19476b;
+    border: 2px solid #19476b;
+}
+
+.forgot-my-password {
+    margin-top: 10px;
+    font-family: 'Lucida Sans Unicode', serif;
+}
+
+.forgot-my-password a, .create-new-account a {
+    text-decoration: none;
+    color: #0a48e5;
+}
+
+.login-footer, .registration-footer {
+    background-color: transparent;
+    color: white;
+    text-align: center;
+}
+
+.login, .registration {
+    background-image: url("../images/background-login.jpg");
+    background-size: 100%;
+    background-size: cover;
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+input, .create-new-account {
+    margin-top: 10px;
+    font-family: 'Lucida Sans Unicode', serif;
+}
+
+.create-new-account {
+    margin-top: 20px;
+    text-align: center;
+}
+
+label {
+    cursor: default;
+}
+
+input:focus ~ label,
+input:not(:placeholder-shown) ~ label {
+    top: -10px;
+}
+
+.registration-field-with-label {
+    font-size: 20px;
+    font-family: 'Lucida Sans Unicode', serif;
+    font-weight: bold;
+    margin-top: 40px;
+}
+
+input.registration-field {
+    border-bottom: 2px solid #1C1C1C;
+}
+
+.form-error {
+    width: 100%;
+}
+
+.form-error ul{
+    font-family: 'Lucida Sans Unicode', serif;
+    text-align: center;
+    list-style: none;
+    color: red;
+    font-size: 13px;
+    padding: 0;
+}
+
+
+.registration-form {
+    width: 350px;
+}
+
+.registration-field-with-label {
+    border: none;
+}
+
+.success, .error {
+    margin: 20px 20px 20px 20px;
+    max-width: 300px;
+    padding: 25px 50px 25px 50px;
+    background: #87e17c;
+    border-radius: 25px;
+    color: #3f6438;
+    text-align: center;
+    list-style: none;
+}
+
+.error {
+    background: #d76355;
+    color: #652f29;
+}

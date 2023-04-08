@@ -1,0 +1,193 @@
+@font-face {
+    font-family: "Lucida Sans Unicode";
+    src: url('../fonts/lucidasansunicode.ttf');
+}
+
+.settings-field {
+    height: 25px;
+    font-family: "Lucida Sans Unicode", monospace;
+}
+
+.profile-field-with-label {
+    display: flex;
+    flex-direction: column;
+}
+
+.title-profile-settings {
+    text-align: center;
+    font-family: "Montserrat", system-ui;
+    font-weight: bolder;
+}
+
+.current-avatar-profile {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+#id_gender {
+    width: 150px;
+}
+
+#button-mobile-uploader {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    width: 150px;
+}
+
+#button-mobile-uploader input[type=file] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    display: block;
+    width: 0;
+    height: 0;
+}
+
+.input-file-list {
+    display: none;
+    padding: 15px 0;
+}
+
+.form-label-photo {
+    margin-bottom: 10px;
+}
+
+.delete-photo {
+    font-size: 15px;
+    margin-left: 10px;
+    color: red;
+    font-weight: bold;
+    font-family: Sans-serif, serif;
+    cursor: pointer;
+}
+
+.current-avatar-profile {
+    margin-bottom: 25px;
+    margin-top: 25px;
+    border-radius: 10px;
+    margin-left: 18px;
+}
+
+.settings-field {
+    height: 25px;
+    border-radius: 6px;
+    border: 2px solid #fdc073;
+    resize: none;
+    margin-top: 10px;
+}
+
+#id_gender {
+    font-family: "Lucida Sans Unicode", serif;
+    width: 120px;
+    height: 30px;
+    padding-left: 5px;
+    border-radius: 10px;
+    border: 2px solid #fdc073;
+    background-color: white;
+}
+
+#id_date_birthday_day, #id_date_birthday_month, #id_date_birthday_year {
+    font-family: "Lucida Sans Unicode", serif;
+    padding-left: 5px;
+    border-radius: 10px;
+    border: 2px solid #fdc073;
+    background-color: white;
+}
+
+.submit-profile-settings {
+
+    background: rgb(40, 33, 33, 1);
+    color: #fdc073;
+    border: 0;
+    cursor: pointer;
+    font-family: "Lucida Sans Unicode", serif;
+    font-size: 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    padding: 5px 5px 5px 5px;
+    height: 34px;
+    width: 200px;
+}
+
+.submit-profile-settings-relative {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.submit-profile-settings:hover {
+    background-color: #FDA83D;
+    color: rgb(40, 33, 33);
+}
+
+.input-file-btn-profile {
+    background-color: #f1a430;
+}
+
+.input-file-btn-profile:hover {
+    background-color: #ab6e03;
+}
+
+.preview-avatar {
+    display: flex;
+    margin-top: 15px;
+}
+
+.title-preview-avatar {
+    margin-top: 30px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.relative-image-input {
+    align-self: center;
+    text-align: center;
+    margin-left: 50px;
+}
+
+.info-for-avatar {
+    margin-bottom: 30px;
+}
+
+.date_birthday select {
+    margin-right: 10px;
+}
+
+.success, .error {
+    margin: 20px 20px 20px 20px;
+    max-width: 610px;
+    padding: 25px 50px 25px 50px;
+    background: #87e17c;
+    border-radius: 25px;
+    color: #3f6438;
+    text-align: center;
+    list-style: none;
+}
+
+.error {
+    background: #d76355;
+    color: #652f29;
+}
+
+.change-password {
+    margin: 20px 10px 20px 0;
+}
+
+.change-password-link {
+    text-decoration: none;
+    color: #0068ab;
+}
+
+.form-error {
+    width: 100%;
+}
+
+.form-error ul{
+    font-family: 'Lucida Sans Unicode', serif;
+    text-align: center;
+    list-style: none;
+    color: red;
+    font-size: 13px;
+    padding: 0;
+}

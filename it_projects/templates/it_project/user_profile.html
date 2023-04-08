@@ -1,0 +1,117 @@
+{% extends 'it_project/base_1.html' %}
+{% load it_projects_tags %}
+
+{% block content %}
+    <div class="main-user-profile">
+        <div class="user-information-block">
+            <span class="username">{{ user_profile.user.username }}</span>
+            <img class='user-profile-avatar' src="{{ user_profile.avatar_author.url }}">
+        </div>
+
+        <div class="field-information">
+            <span class="name-field">Имя: </span>
+            {% if user_profile.first_name %}
+                <span class="first-name">{{ user_profile.first_name }}</span>
+            {% else %}
+                <span class="first-name">Не указано</span>
+            {% endif %}
+        </div>
+
+        <div class="field-information">
+            <span class="name-field">Фамилия: </span>
+            {% if user_profile.last_name %}
+                <span class="last-name">{{ user_profile.last_name }}</span>
+            {% else %}
+                <span class="last-name">Не указано</span>
+            {% endif %}
+        </div>
+
+        <div class="field-information">
+            <span class="name-field">Пол: </span>
+            {% if user_profile.gender == 'M' %}
+                <span class="gender">Мужской</span>
+            {% elif user_profile.gender == 'F' %}
+                <span class="gender">Женский</span>
+            {% else %}
+                <span class="gender">Не указано</span>
+            {% endif %}
+        </div>
+
+        <div class="field-information">
+            <span class="name-field">Дата рождения: </span>
+            {% if user_profile.date_birthday %}
+                <span class="date-birthday">{{ user_profile.date_birthday }}</span>
+            {% else %}
+                <span class="date-birthday">Не указано</span>
+            {% endif %}
+        </div>
+
+        <div class="field-information">
+            <span class="name-field">Дата регистрации: </span>
+            {% if user_profile.user.date_joined %}
+                <span class="date-registration">{{ user_profile.user.date_joined|date:"d.m.Y в H:i" }}</span>
+            {% else %}
+                <span class="date-registration">Не указано</span>
+            {% endif %}
+        </div>
+        <div class="title-public-articles-relative">
+            <span class="title-public-articles">Статьи пользователя</span>
+            {% if count_post == 0 %}
+                <span class="no-articles">Пользователь пока не опубликовал ни одной статьи</span>
+            {% else %}
+                <span id="title-public-articles-triangle"></span>
+            {% endif %}
+        </div>
+    </div>
+    {% if count_post > 5 %}
+        <div class="articles-user">
+            {% for p in post_user|slice:":5" %}
+                <div class="article">
+                    <div class="article-panel">
+                        <div class="author-post-avatar"><a href="{{ p.author_setting.get_absolute_url }}"><img
+                                class="author-post-avatar-img"
+                                src="/media/{{ p.author_setting.avatar_author }}" alt="{{ p.slug }}"></a>
+                        </div>
+                        <div class="author-post"><a
+                                href="{{ p.author_setting.get_absolute_url }}">{{ p.author }}</a></div>
+                        <div class="date_post">{{ p.time_create|date:"d M. в H:i" }}</div>
+                    </div>
+                    <a class="title_post" href="{{ p.get_absolute_url }}">{{ p.title }}</a>
+                    <div class="category"><a href="{{ p.category.get_absolute_url }}"
+                                             class="{{ p.category.slug }}">{{ p.category.name }}</a></div>
+                    <div class="photo-of-the-post">
+                        {% if p.photo %}
+                            <img class="img-post" src="{{ p.photo.url }}" alt="{{ p.slug }}">
+                        {% endif %}
+                    </div>
+                    <p>{{ p.content|linebreaks }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% elif count_post > 0 %}
+        <div class="articles-user">
+            {% for p in post_user %}
+                <div class="article">
+                    <div class="article-panel">
+                        <div class="author-post-avatar"><a href="{{ p.author_setting.get_absolute_url }}"><img
+                                class="author-post-avatar-img"
+                                src="/media/{{ p.author_setting.avatar_author }}" alt="{{ p.slug }}"></a>
+                        </div>
+                        <div class="author-post"><a
+                                href="{{ p.author_setting.get_absolute_url }}">{{ p.author }}</a></div>
+                        <div class="date_post">{{ p.time_create|date:"d M. в H:i" }}</div>
+                    </div>
+                    <a class="title_post" href="{{ p.get_absolute_url }}">{{ p.title }}</a>
+                    <div class="category"><a href="{{ p.category.get_absolute_url }}"
+                                             class="{{ p.category.slug }}">{{ p.category.name }}</a></div>
+                    <div class="photo-of-the-post">
+                        {% if p.photo %}
+                            <img class="img-post" src="{{ p.photo.url }}" alt="{{ p.slug }}">
+                        {% endif %}
+                    </div>
+                    <p>{{ p.content|linebreaks }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

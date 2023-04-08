@@ -1,0 +1,22 @@
+{% extends 'it_project/base_1.html' %}
+{% load it_projects_tags %}
+
+{% block burger-menu %}
+    <li id="burger-categories" class="burger-categories">
+        <span id="title-categories">Категории</span>
+        <ul id="menu_categories">
+            {% if cat_selected == 0 %}
+                <li class="selected">Все категории</li>
+            {% else %}
+                <li><a href="{% url 'main' %}">Все категории</a></li>
+            {% endif %}
+            {% for c in cats %}
+                {% if c.slug == cat_selected %}
+                    <li class="selected">{{ c.name }}</li>
+                {% else %}
+                    <li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </li>
+{% endblock %}

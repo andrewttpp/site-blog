@@ -1,0 +1,56 @@
+{% load it_projects_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>{{ title }}</title>
+    <link type="text/css" href="{% static 'it_projects/css/style_login.css' %}" rel="stylesheet"/>
+    <link type="text/css" href="{% static 'it_projects/css/style_login_mobile.css' %}" rel="stylesheet"/>
+    <meta http-equiv="Content-Type" content="application/javascript; charset=utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="login">
+<div class="main-authentication">
+    {% block content %}
+        {% if messages %}
+            {% for message in messages %}
+                 <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        {% endif %}
+        <form method="post" class="authentication-form">
+            {% csrf_token %}
+            <span class="authentication-title">Вход в аккаунт</span>
+            <div class="form-error">
+                {{ form.non_field_errors }}
+            </div>
+            {% for f in form %}
+                <div class="authentication-field-with-label">
+                    {{ f }}
+                    <label class="authentication-label" for="">{{ f.label }}</label>
+                    <div class="form-error">{{ f.errors }}</div>
+                </div>
+            {% endfor %}
+            <div class="forgot-my-password">
+                <a href="{% url 'password_recovery' %}">Забыли пароль?</a>
+            </div>
+            <div class="authentication-button">
+                <button class="authentication-button-submit" type="submit">Войти</button>
+            </div>
+            <div class="create-new-account">
+                <span>Ещё нет аккаунта? <a href="{% url 'registration' %}">Зарегестрируйтесь</a></span>
+            </div>
+        </form>
+    {% endblock %}
+</div>
+<footer class="login-footer">
+    <p>&copy; 2023 Частичное или полное копирование информации с данного сайта для распространения на
+        других
+        ресурсах, в том числе и бумажных, строго запрещено.</p>
+</footer>
+</body>
+</html>
+<script>
+    document.querySelector('input:not(:placeholder-shown)')
+</script>
+

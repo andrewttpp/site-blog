@@ -1,0 +1,43 @@
+{% load it_projects_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>{{ title }}</title>
+    <link type="text/css" href="{% static 'it_projects/css/style_login.css' %}" rel="stylesheet"/>
+    <link type="text/css" href="{% static 'it_projects/css/style_login_mobile.css' %}" rel="stylesheet"/>
+    <script defer src="{% static 'it_projects/js/register.js' %}"></script>
+    <meta http-equiv="Content-Type" content="application/javascript; charset=utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="registration">
+<div class="main-registration">
+    {% block content %}
+        <form method="post" class="registration-form">
+            {% csrf_token %}
+            <span class="registration-title">Регистрация</span>
+            <div class="form-error">
+                {{ form.non_field_errors }}
+            </div>
+            {% for f in form %}
+                <div class="registration-field-with-label">
+                    {{ f }}
+                    <label class="registration-label" for="">{{ f.label }}</label>
+                    {{ f.help_text }}
+                </div>
+                <div class="form-error">{{ f.errors }}</div>
+            {% endfor %}
+            <div class="registration-button">
+                <button class="registration-button-submit" type="submit">Зарегистрироваться</button>
+            </div>
+        </form>
+    {% endblock %}
+</div>
+<footer class="registration-footer">
+    <p>&copy; 2023 Частичное или полное копирование информации с данного сайта для распространения на
+        других
+        ресурсах, в том числе и бумажных, строго запрещено.</p>
+</footer>
+</body>
+</html>

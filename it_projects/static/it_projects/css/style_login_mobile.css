@@ -1,0 +1,72 @@
+@media only screen and (max-width: 550px) {
+
+    .registration-form {
+        width: auto;
+    }
+
+    .registration-form {
+        padding: 25px 30px 25px 30px;
+        border-radius: 20px;
+        border: 3px solid #1c567c;
+        background: transparent;
+        backdrop-filter: blur(10px);
+        font-family: 'Fira Code', serif;
+        width: 70%;
+    }
+
+    .registration-title {
+        font-size: 28px;
+    }
+
+    .registration-field-with-label {
+        margin-top: 40px;
+    }
+
+    .registration-label {
+        font-size: 16px;
+    }
+
+
+    .registration-field, .registration-footer {
+        font-size: 13px;
+    }
+
+}
+
+@media only screen and (max-width: 480px) {
+    .error, .success {
+        font-size: 13px;
+        margin: 10px 10px 10px 10px;
+        padding: 25px 40px 25px 40px;
+    }
+
+    .authentication-form {
+        padding: 25px 30px 25px 30px;
+        border-radius: 20px;
+        border: 3px solid #1c567c;
+        background: transparent;
+        backdrop-filter: blur(10px);
+        font-family: 'Fira Code', serif;
+    }
+
+
+    .authentication-title {
+        font-size: 28px;
+    }
+
+    .authentication-field-with-label {
+        margin-top: 40px;
+    }
+
+    .authentication-label {
+        font-size: 16px;
+    }
+
+    .forgot-my-password, .create-new-account, .login-footer {
+        font-size: 13px;
+    }
+
+    .authentication-field {
+        font-size: 13px;
+    }
+}

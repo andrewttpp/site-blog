@@ -1,0 +1,55 @@
+{% extends 'it_project/base_1.html' %}
+{% load it_projects_tags %}
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    {% endif %}
+    <div class="form">
+        <form method="post" class="my-profile-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1 class="title-profile-settings">Настройки профиля</h1>
+            <div class="form-error">
+                {{ form.non_field_errors }}
+            </div>
+            {% for f in form %}
+                {% if f.id_for_label == 'id_avatar_author' %}
+                    <div class="profile-field-with-label">
+                        <label class="profile-label">{{ f.label }}</label>
+                        <div class="preview-avatar">
+                            <img src='{{ f.initial.url }}' class="current-avatar-profile">
+                            <div class="relative-image-input">
+                                <span class="info-for-avatar">Максимальный размер загружаемого фото 100x100<br>Доступные форматы .jpg, .png</span>
+                                <br>
+                                <br>
+                                <label id="button-mobile-uploader">
+                                    {{ f }}
+                                    <span class="input-file-btn-profile">Выберите файл</span>
+                                </label>
+                                <div class="input-file-list">
+                                    <span class="name-file"></span>
+                                    <span class="delete-photo" onclick="deleteCurrentPhoto()">X</span>
+                                </div>
+                                <div class="form-error">{{ f.errors }}</div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="profile-field-with-label">
+                        <label class="profile-label">{{ f.label }}</label>
+                        {{ f }}
+                        <div class="form-error">{{ f.errors }}</div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <div class="change-password">
+                <a href="{% url 'password_change' %}" class="change-password-link">Изменить пароль</a>
+            </div>
+            <div class="submit-profile-settings-relative">
+                <button type="submit" class="submit-profile-settings">Сохранить изменения</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

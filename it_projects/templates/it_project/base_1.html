@@ -1,0 +1,176 @@
+{% load it_projects_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>{{ title }}</title>
+    <link type="text/css" href="{% static 'it_projects/css/style_other_colorscheme.css' %}" rel="stylesheet"/>
+    <link type="text/css" href="{% static 'it_projects/css/styles_2.css' %}" rel="stylesheet"/>
+    <link type="text/css" href="{% static 'it_projects/css/style_profile.css' %}" rel="stylesheet"/>
+    <script defer src="{% static 'it_projects/js/main.js' %}"></script>
+    <script defer src="{% static 'it_projects/js/profile_user.js' %}"></script>
+    <meta http-equiv="Content-Type" content="application/javascript; charset=utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link rel="shortcut icon" href="{% static 'it_projects/images/logo-globus.png' %}"
+          type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="main-head">
+    <header class="header">
+        <div class="container__header__container">
+            <button class="header__burger-btn" id="burger">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="menu">
+                <ul class="menu__list">
+                    {% for m in menu %}
+                        {% if m.url_name == 'login' %}
+                            {% if not request.user.is_authenticated %}
+                                <li class="login"><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+                            {% else %}
+                                <li class="user-block">
+                                    <span id="name_user">Мой профиль</span>
+                                    <span id="label-categories-triangle-burger"></span>
+                                    <ul class="menu_user">
+                                        <li class="user-profile"><a href="{% url 'my_profile' %}">Настройки профиля</a>
+                                        </li>
+                                        <li class="add-article"><a href="{% url 'add_page' %}">Добавить статью</a></li>
+                                    </ul>
+                                </li>
+                            {% endif %}
+                            <li id="burger-categories" class="burger-categories">
+                                <span id="title-categories">Категории</span>
+                                <span id="label-categories-triangle-burger"></span>
+                                <ul id="menu_categories">
+                                    {% if cat_selected == 0 %}
+                                        <li class="selected">Все категории</li>
+                                    {% else %}
+                                        <li><a href="{% url 'main' %}">Все категории</a></li>
+                                    {% endif %}
+                                    {% for c in cats %}
+                                        {% if c.slug == cat_selected %}
+                                            <li class="selected">{{ c.name }}</li>
+                                        {% else %}
+                                            <li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if request.user.is_authenticated %}
+                        <li class="logout"><a href="{% url 'logout' %}">Выйти</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+
+        {% block mainmenu %}
+            <ul id="mainmenu" class="mainmenu">
+                <li class="logo"><a href="{% url 'main' %}">
+                    <div class="head">
+                        <div class="img-logo">
+                            <img class="logo-header" src="{% static 'it_projects/images/logo-globus.png' %}">
+                        </div>
+                        <div class="text-logo">
+                            <span>IT SPHERE</span>
+                        </div>
+                    </div>
+                </a></li>
+                {% for m in menu %}
+                    {% if m.url_name == 'login' %}
+                        {% if not request.user.is_authenticated %}
+                            <li class="user-block_header">
+                                <img class="user-button_header" src="{% static 'it_projects/images/user.png' %}">
+                                <ul class="menu_user_header">
+                                    <li class="login"><a href="{% url 'login' %}">Войти</a></li>
+                                    <li class="registration"><a href="{% url 'registration' %}">Регистрация</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="user-block_header">
+                                <img class="user-button_header" src="{% static 'it_projects/images/user.png' %}">
+                                <ul class="menu_user_header">
+                                    <li class="user-profile"><a href="{% url 'my_profile' %}">Настройки профиля</a></li>
+                                    <li class="add-article"><a href="{% url 'add_page' %}">Добавить статью</a></li>
+                                    <li class="logout"><a href="{% url 'logout' %}">Выйти</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+        {% endblock mainmenu %}
+    </header>
+    <div class="menu-after-header">
+        <li class="main-menu categories-chapter">
+            <div class="main-label-categories">
+                <span id="label-categories">Категории</span>
+                <span id="label-categories-triangle"></span>
+            </div>
+            <ul id="rightchapters">
+                {% if cat_selected == 0 %}
+                    <li class="selected">Все категории</li>
+                {% else %}
+                    <li><a href="{% url 'main' %}">Все категории</a></li>
+                {% endif %}
+                {% for c in cats %}
+                    {% if c.slug == cat_selected %}
+                        <li class="selected">{{ c.name }}</li>
+                    {% else %}
+                        <li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </li>
+
+        {% for m in menu %}
+            {% if m.url_name != 'login' %}
+                <li class="main-menu"><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+<div class="main">
+    {% block content %}
+    {% endblock %}
+    {% block best-articles %}
+    {% endblock %}
+</div>
+{% if page_obj.has_other_pages %}
+    <nav class="list-pages">
+        <ul>
+            {% if page_obj.has_previous %}
+                <li class="page-num">
+                    <a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                </li>
+            {% endif %}
+            {% for p in paginator.page_range %}
+                {% if page_obj.number == p %}
+                    <li class="page-num page-num-selected">{{ p }}</li>
+                {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+                    <li class="page-num">
+                        <a href="?page={{ p }}">{{ p }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li class="page-num">
+                    <a href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+<footer>
+    <p>&copy; 2023 Частичное или полное копирование информации с данного сайта для распространения на
+        других
+        ресурсах, в том числе и бумажных, строго запрещено.</p>
+
+</footer>
+</body>
+</html>

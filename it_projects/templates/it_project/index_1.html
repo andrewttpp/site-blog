@@ -1,0 +1,52 @@
+{% extends 'it_project/base_1.html' %}
+{% load it_projects_tags %}
+
+{% block content %}
+    <div class="content-text">
+    {% if messages %}
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            {% endif %}
+        {% for p in posts %}
+            <div class="posts">
+                <div class="article-panel">
+                    <div class="author-post-avatar"><a href="{{ p.author_setting.get_absolute_url }}"><img
+                            class="author-post-avatar-img"
+                            src="{{ p.author_setting.avatar_author.url }}" alt="{{ p.slug }}"></a></div>
+                    <div class="author-post"><a href="{{ p.author_setting.get_absolute_url }}">{{ p.author }}</a></div>
+                    <div class="date_post">{{ p.time_create|date:"d M. в H:i" }}</div>
+                </div>
+                <a class="title_post" href="{{ p.get_absolute_url }}">{{ p.title }}</a>
+                <div class="category">
+                    <a href="{{ p.category.get_absolute_url }}" class={{ p.category.slug }}>{{ p.category.name }}</a>
+                </div>
+                <div class=" ">
+                    {% if p.photo %}
+                        <img class="img-post" src="{{ p.photo.url }}" alt="{{ p.slug }}">
+                    {% endif %}
+                </div>
+                <p>{{ p.header_text|linebreaks }}</p>
+                <a class="read-next" href="{{ p.get_absolute_url }}">{{ p.name_button_next }}</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block best-articles %}
+    {% getbest as best_posts %}
+    {% if best_posts %}
+        <div class="best-articles">
+            <h1> Лучшие статьи </h1>
+            <hr>
+            <div class="articles">
+                {% for p in best_posts %}
+                    <div class="article_in_best_articles">
+                        <a class="best_post" href="{{ p.get_absolute_url }}">{{ p.title }}</a>
+                        <hr>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
