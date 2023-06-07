@@ -1,7 +1,5 @@
 # My first website written in Django
 
------
-
 <p align="center">
 <a href="https://github.com/simple-icons/simple-icons/actions?query=workflow%3AVerify+branch%3Adevelop"><img src="https://img.shields.io/badge/python-v3.9-blue.svg"/></a>
 <a href="https://github.com/simple-icons/simple-icons/actions?query=workflow%3AVerify+branch%3Adevelop"><img src="https://img.shields.io/badge/django-v4.1-green.svg"/></a>
@@ -9,14 +7,14 @@
 
 -----
 ## About Project
-> <h5>This is my first full-scale django project. The goal of the project is to get acquainted with all aspects of the Python language from the point of view of Web development, as well as with the powerful Django framework. Don't judge strictly 😄</h2>
+<h5>This is my first full-scale django project. The goal of the project is to get acquainted with all aspects of the Python language from the point of view of Web development, as well as with the powerful Django framework. Don't judge strictly 😄</h2>
 -----
 ## Site Visual
 
-![image_1.png](readme_settings/image_1.png)
-![image_2.png](readme_settings/image_2.png)
+![image_1.png](readme_files/image_1.png)
+![image_2.png](readme_files/image_2.png)
 <p align="center">
-<img alt="image_3.png" height="400" src="readme_settings/image_3.jpg"/>
+<img alt="image_3.png" height="400" src="readme_files/image_3.jpg"/>
 </p>
 
 -----
