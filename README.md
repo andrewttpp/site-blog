@@ -8,7 +8,9 @@
 -----
 ## About Project
 <h5>This is my first full-scale django project. The goal of the project is to get acquainted with all aspects of the Python language from the point of view of Web development, as well as with the powerful Django framework. Don't judge strictly 😄</h2>
+
 -----
+
 ## Site Visual
 
 ![image_1.png](readme_files/image_1.png)
@@ -20,8 +22,6 @@
 -----
 ## Configuration 
 <h5>Container can be configured via environment variables</h5>
-
-`SECRET_KEY` - secret key your app
 
 `EMAIL_HOST` - the host to use for sending email `default = smtp.gmail.com`
 
@@ -36,12 +36,11 @@
 ## Installation
 
 ```
-git clone https://github.com/tdlib/telegram-bot-api.git
+git clone https://github.com/andrewttpp/site-blog.git
 
 docker build -f ./Dockerfile -t my_site_django:latest .
 
-docker run -d -p 8000:8000 -e "SECRET_KEY=<secret_key>" my_site_django python /us
-r/src/app/manage.py runserver 0.0.0.0:8000
+docker run -d -p 8000:8000 -e my_site_django python /usr/src/app/manage.py runserver 0.0.0.0:8000
 ```
 
 ### ⚠️Warning
